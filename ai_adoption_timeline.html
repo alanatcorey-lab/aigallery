@@ -1,610 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Adoption Timeline</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #1c1a16;
-    --ink-2: #4a4740;
-    --ink-3: #8a877e;
-    --cream: #f8f5ef;
-    --cream-2: #eeebe2;
-    --cream-3: #e3dfd5;
-    --teal: #1D9E75;
-    --teal-light: #E1F5EE;
-    --teal-mid: #0F6E56;
-    --purple: #534AB7;
-    --purple-light: #EEEDFE;
-    --amber: #BA7517;
-    --amber-light: #FAEEDA;
-    --accent: #D85A30;
-    --accent-light: #FAECE7;
-    --gray-light: #F1EFE8;
-  }
-
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    padding: 56px 40px 80px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  /* HEADER */
-  .header {
-    margin-bottom: 52px;
-    position: relative;
-  }
-
-  .header-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 10px;
-  }
-
-  .header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 44px;
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 14px;
-  }
-
-  .header-rule {
-    width: 56px;
-    height: 2px;
-    background: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .header-desc {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.7;
-    max-width: 560px;
-  }
-
-  .header-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--cream-2);
-    border: 0.5px solid var(--cream-3);
-    border-radius: 8px;
-    padding: 10px 16px;
-    text-align: center;
-  }
-
-  .badge-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .badge-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--ink);
-    display: block;
-    line-height: 1;
-  }
-
-  .badge-sub {
-    font-size: 11px;
-    color: var(--ink-3);
-    display: block;
-    margin-top: 3px;
-  }
-
-  /* CONTEXT BAR */
-  .context-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 44px;
-  }
-
-  .context-item {
-    background: #fff;
-    border: 0.5px solid var(--cream-3);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-
-  .context-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 4px;
-    display: block;
-  }
-
-  .context-value {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.4;
-  }
-
-  /* TIMELINE */
-  .timeline {
-    position: relative;
-    padding-left: 32px;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 12px;
-    bottom: 12px;
-    width: 1.5px;
-    background: linear-gradient(to bottom, var(--teal), var(--purple), var(--amber), var(--accent));
-    opacity: 0.3;
-  }
-
-  .phase {
-    position: relative;
-    margin-bottom: 36px;
-    opacity: 0;
-    transform: translateX(-12px);
-    animation: slideIn 0.5s ease forwards;
-  }
-
-  .phase:nth-child(1) { animation-delay: 0.05s; }
-  .phase:nth-child(2) { animation-delay: 0.15s; }
-  .phase:nth-child(3) { animation-delay: 0.25s; }
-  .phase:nth-child(4) { animation-delay: 0.35s; }
-  .phase:nth-child(5) { animation-delay: 0.45s; }
-  .phase:nth-child(6) { animation-delay: 0.55s; }
-
-  @keyframes slideIn {
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .phase-dot {
-    position: absolute;
-    left: -29px;
-    top: 14px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1.5px currentColor;
-    flex-shrink: 0;
-  }
-
-  .phase-dot.teal   { color: var(--teal);   background: var(--teal); }
-  .phase-dot.purple { color: var(--purple); background: var(--purple); }
-  .phase-dot.amber  { color: var(--amber);  background: var(--amber); }
-  .phase-dot.accent { color: var(--accent); background: var(--accent); }
-  .phase-dot.gray   { color: var(--ink-3);  background: var(--ink-3); }
-  .phase-dot.future { color: var(--cream-3); background: var(--cream-3); box-shadow: 0 0 0 1.5px var(--cream-3); border: 2px dashed var(--ink-3); }
-
-  .phase-card {
-    background: #fff;
-    border: 0.5px solid var(--cream-3);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .phase-header {
-    padding: 16px 20px 12px;
-    border-bottom: 0.5px solid var(--cream-2);
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .phase-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 20px;
-    margin-bottom: 7px;
-  }
-
-  .tag-teal   { background: var(--teal-light);   color: var(--teal-mid); }
-  .tag-purple { background: var(--purple-light);  color: var(--purple); }
-  .tag-amber  { background: var(--amber-light);   color: var(--amber); }
-  .tag-accent { background: var(--accent-light);  color: var(--accent); }
-  .tag-gray   { background: var(--gray-light);    color: var(--ink-3); }
-  .tag-future { background: var(--cream-2);       color: var(--ink-3); border: 0.5px dashed var(--ink-3); }
-
-  .phase-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-
-  .phase-duration {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-3);
-    white-space: nowrap;
-    padding-top: 3px;
-    flex-shrink: 0;
-  }
-
-  .phase-body {
-    padding: 16px 20px 18px;
-  }
-
-  .phase-desc {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-2);
-    line-height: 1.75;
-    margin-bottom: 14px;
-  }
-
-  .milestones {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .milestone {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-    font-size: 12.5px;
-    color: var(--ink-2);
-    line-height: 1.55;
-  }
-
-  .milestone-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--cream-3);
-    flex-shrink: 0;
-    margin-top: 7px;
-  }
-
-  .milestone-dot.teal   { background: var(--teal); }
-  .milestone-dot.purple { background: var(--purple); }
-  .milestone-dot.amber  { background: var(--amber); }
-  .milestone-dot.accent { background: var(--accent); }
-
-  .insight-box {
-    margin-top: 14px;
-    background: var(--cream);
-    border-radius: 8px;
-    padding: 11px 14px;
-    font-size: 12px;
-    font-style: italic;
-    color: var(--ink-3);
-    line-height: 1.6;
-    border-left: 2px solid var(--cream-3);
-  }
-
-  .insight-label {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    display: block;
-    margin-bottom: 3px;
-  }
-
-  /* TAKEAWAY */
-  .takeaway {
-    margin-top: 40px;
-    background: var(--ink);
-    border-radius: 12px;
-    padding: 28px 32px;
-    color: #fff;
-  }
-
-  .takeaway-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .takeaway-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.55;
-    color: #fff;
-    margin-bottom: 16px;
-  }
-
-  .takeaway-frameworks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .takeaway-pill {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 0.5px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.6);
-  }
-
-  /* FOOTER */
-  .footer {
-    margin-top: 32px;
-    padding-top: 20px;
-    border-top: 0.5px solid var(--cream-3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .footer-note {
-    font-size: 11px;
-    color: var(--ink-3);
-    line-height: 1.6;
-    font-style: italic;
-  }
-
-  .footer-course {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>AI Gallery | ORL 5199</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #f8f5ef;
+      color: #1c1a16;
+      padding: 56px 40px 80px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #1D9E75;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .rule {
+      width: 56px;
+      height: 2px;
+      background: #D85A30;
+      margin-bottom: 16px;
+    }
+    .desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: #4a4740;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .panels { display: flex; flex-direction: column; gap: 2px; }
+    a.panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border: 0.5px solid #e3dfd5;
+      border-radius: 0;
+      padding: 20px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    a.panel:first-child { border-radius: 12px 12px 0 0; }
+    a.panel:last-child  { border-radius: 0 0 12px 12px; }
+    a.panel:hover { background: #eeebe2; }
+    .panel-left { display: flex; align-items: center; gap: 16px; }
+    .panel-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #e3dfd5;
+      width: 28px;
+      flex-shrink: 0;
+    }
+    .panel-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #1c1a16;
+      margin-bottom: 3px;
+    }
+    .panel-sub {
+      font-size: 12px;
+      font-weight: 300;
+      color: #8a877e;
+    }
+    .panel-arrow {
+      font-size: 18px;
+      color: #e3dfd5;
+    }
+    .footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: #8a877e;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 0.5px solid #e3dfd5;
+    }
+  </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-badge">
-    <span class="badge-label">Organization age</span>
-    <span class="badge-value">178</span>
-    <span class="badge-sub">years in operation</span>
-  </div>
-  <p class="header-eyebrow">ORL 5199 · Augmented by Design</p>
-  <h1>AI Adoption<br>in Practice</h1>
-  <div class="header-rule"></div>
-  <p class="header-desc">A look inside how one 178-year-old organization navigated AI integration, from a single grassroots experiment to an enterprise-wide governance model, across approximately two years.</p>
-</div>
+  <p class="eyebrow">ORL 5199 · Augmented by Design</p>
+  <h1>AI Gallery</h1>
+  <div class="rule"></div>
+  <p class="desc">Five panels exploring AI myths, best practices, human-AI collaboration, a real adoption journey, and what it all means for your team.</p>
 
-<!-- CONTEXT BAR -->
-<div class="context-bar">
-  <div class="context-item">
-    <span class="context-label">Organization</span>
-    <span class="context-value">Large insurance company, Midwestern US</span>
-  </div>
-  <div class="context-item">
-    <span class="context-label">Size</span>
-    <span class="context-value">~3,000 employees, two-thirds in Ohio</span>
-  </div>
-  <div class="context-item">
-    <span class="context-label">Starting posture</span>
-    <span class="context-value">Grassroots, no formal AI mandate at launch</span>
-  </div>
-</div>
-
-<!-- TIMELINE -->
-<div class="timeline">
-
-  <!-- PHASE 1 -->
-  <div class="phase">
-    <div class="phase-dot teal"></div>
-    <div class="phase-card">
-      <div class="phase-header">
+  <div class="panels">
+    <a class="panel" href="https://alanatcorey-lab.github.io/aigallery/ai_myth_busters_gallery.html">
+      <div class="panel-left">
+        <div class="panel-number">1</div>
         <div>
-          <span class="phase-tag tag-teal">Phase 1</span>
-          <h2 class="phase-title">The spark: one team starts experimenting</h2>
-        </div>
-        <span class="phase-duration">Months 1 to 6</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">AI adoption began not with a strategy document or executive mandate, but with a single person in the actuarial practice exploring what was possible. No formal program. No budget. Just curiosity.</p>
-        <div class="milestones">
-          <div class="milestone"><div class="milestone-dot teal"></div>Actuarial team begins informal AI experimentation</div>
-          <div class="milestone"><div class="milestone-dot teal"></div>Early use cases center on personal productivity: drafting, summarizing, research</div>
-          <div class="milestone"><div class="milestone-dot teal"></div>Word spreads organically across adjacent teams</div>
-          <div class="milestone"><div class="milestone-dot teal"></div>No governance structure yet, adoption entirely peer-driven</div>
-        </div>
-        <div class="insight-box">
-          <span class="insight-label">Key insight</span>
-          "It was very organic, it started grassroots, first person was in the actuarial practice."
+          <div class="panel-title">AI Myth Busters</div>
+          <div class="panel-sub">Four common myths, debunked by research</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- PHASE 2 -->
-  <div class="phase">
-    <div class="phase-dot purple"></div>
-    <div class="phase-card">
-      <div class="phase-header">
+      <div class="panel-arrow">→</div>
+    </a>
+    <a class="panel" href="https://alanatcorey-lab.github.io/aigallery/ai_best_practices_gallery.html">
+      <div class="panel-left">
+        <div class="panel-number">2</div>
         <div>
-          <span class="phase-tag tag-purple">Phase 2</span>
-          <h2 class="phase-title">Building community: the AI incubator forms</h2>
-        </div>
-        <span class="phase-duration">Months 6 to 12</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Interest grew quickly enough that a formal community of practice emerged as an incubator for experimentation. Two employees became fully dedicated to AI adoption. The organization brought in outside voices and created structured moments to surface what was working.</p>
-        <div class="milestones">
-          <div class="milestone"><div class="milestone-dot purple"></div>Community of practice launched, meeting every other week</div>
-          <div class="milestone"><div class="milestone-dot purple"></div>IT moderator selected to facilitate cross-team learning</div>
-          <div class="milestone"><div class="milestone-dot purple"></div>Pilot licenses secured for ChatGPT and GitHub Copilot</div>
-          <div class="milestone"><div class="milestone-dot purple"></div>Two employees' roles shift entirely to AI enablement</div>
-          <div class="milestone"><div class="milestone-dot purple"></div>AI Day and hackathon held on campus, generating early solutions</div>
-        </div>
-        <div class="insight-box">
-          <span class="insight-label">Key insight</span>
-          Peer learning, not formal training, drove upskilling. No structured curriculum existed; knowledge spread through community participation and experimentation.
+          <div class="panel-title">AI Best Practices</div>
+          <div class="panel-sub">Five research-grounded practices for leaders</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- PHASE 3 -->
-  <div class="phase">
-    <div class="phase-dot amber"></div>
-    <div class="phase-card">
-      <div class="phase-header">
+      <div class="panel-arrow">→</div>
+    </a>
+    <a class="panel" href="https://alanatcorey-lab.github.io/aigallery/ai_collaboration_map.html">
+      <div class="panel-left">
+        <div class="panel-number">3</div>
         <div>
-          <span class="phase-tag tag-amber">Phase 3</span>
-          <h2 class="phase-title">Proving value: viable solutions emerge</h2>
-        </div>
-        <span class="phase-duration">Months 12 to 18</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Experimentation began yielding real business results. Use cases moved beyond personal productivity into operational workflows, with early wins in claims handling, underwriting support, and security operations. The question shifted from "can AI help?" to "how do we scale what's working?"</p>
-        <div class="milestones">
-          <div class="milestone"><div class="milestone-dot amber"></div>Claims handling identified as top use case: AI condenses large volumes of documentation for human review</div>
-          <div class="milestone"><div class="milestone-dot amber"></div>Underwriting support: AI aggregates geo, weather, and risk data to inform decisions</div>
-          <div class="milestone"><div class="milestone-dot amber"></div>Security operations: AI identifies anomalies and recommends responses for analyst review</div>
-          <div class="milestone"><div class="milestone-dot amber"></div>Email security: AI detects phishing patterns and sender anomalies</div>
-          <div class="milestone"><div class="milestone-dot amber"></div>Human review embedded as a non-negotiable checkpoint across all production use cases</div>
-        </div>
-        <div class="insight-box">
-          <span class="insight-label">Key insight</span>
-          Every production use case retained a human in the loop. Legal, ethical, and trust considerations made autonomous AI decision-making a non-starter, particularly in insurance contexts.
+          <div class="panel-title">AI Collaboration Map</div>
+          <div class="panel-sub">Human-AI handoffs across two real workflows</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- PHASE 4 -->
-  <div class="phase">
-    <div class="phase-dot accent"></div>
-    <div class="phase-card">
-      <div class="phase-header">
+      <div class="panel-arrow">→</div>
+    </a>
+    <a class="panel" href="https://alanatcorey-lab.github.io/aigallery/ai_adoption_timeline.html">
+      <div class="panel-left">
+        <div class="panel-number">4</div>
         <div>
-          <span class="phase-tag tag-accent">Phase 4</span>
-          <h2 class="phase-title">Formalizing: governance and the hub-and-spoke model</h2>
-        </div>
-        <span class="phase-duration">Months 18 to 24</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">With proven value across multiple teams, the organization moved to formalize what had grown organically. A hub-and-spoke governance model emerged, with a center of excellence coordinating adoption across business lines. Oversight structures were built to address risk, regulation, and shadow AI concerns.</p>
-        <div class="milestones">
-          <div class="milestone"><div class="milestone-dot accent"></div>Hub-and-spoke model established: center of excellence as hub, business lines as spokes</div>
-          <div class="milestone"><div class="milestone-dot accent"></div>AI governance review board formed: includes Chief Privacy Officer, Chief Data Officer, senior actuarial and IT leaders</div>
-          <div class="milestone"><div class="milestone-dot accent"></div>AI steering committee created above the review board, presenting quarterly to the board of directors</div>
-          <div class="milestone"><div class="milestone-dot accent"></div>Shadow AI formally named as a risk: "Can't protect what you're not aware of"</div>
-          <div class="milestone"><div class="milestone-dot accent"></div>CEO signals AI is not optional, creating organization-wide permission to engage</div>
-          <div class="milestone"><div class="milestone-dot accent"></div>Cascading goal introduced: every employee identifies at least one AI-supported optimization opportunity</div>
-        </div>
-        <div class="insight-box">
-          <span class="insight-label">Key insight</span>
-          Governance followed learning, not the other way around. The structures that emerged were shaped by two years of lived experience, not by theoretical planning.
+          <div class="panel-title">AI Adoption Timeline</div>
+          <div class="panel-sub">A partner organization's two-year journey</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- PHASE 5 -->
-  <div class="phase">
-    <div class="phase-dot gray"></div>
-    <div class="phase-card">
-      <div class="phase-header">
+      <div class="panel-arrow">→</div>
+    </a>
+    <a class="panel" href="https://alanatcorey-lab.github.io/aigallery/ai_so_what_closing.html">
+      <div class="panel-left">
+        <div class="panel-number">5</div>
         <div>
-          <span class="phase-tag tag-gray">Current state</span>
-          <h2 class="phase-title">Scaling: from productivity to enterprise integration</h2>
-        </div>
-        <span class="phase-duration">Now</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">The organization describes itself as in the "vast follower plus" category, past early adoption but not yet a market shaper. The focus is shifting from personal productivity toward embedding AI into core business processes, while managing the cultural and organizational change that comes with it.</p>
-        <div class="milestones">
-          <div class="milestone"><div class="milestone-dot"></div>Approximately 90% of AI use still in personal productivity mode</div>
-          <div class="milestone"><div class="milestone-dot"></div>Community of practice now 500+ members on a dedicated Teams channel</div>
-          <div class="milestone"><div class="milestone-dot"></div>New bridge roles emerging to connect business and technical teams</div>
-          <div class="milestone"><div class="milestone-dot"></div>Open question: how to scale what works in one business line across the enterprise</div>
-          <div class="milestone"><div class="milestone-dot"></div>Org change management identified as the next major challenge</div>
-          <div class="milestone"><div class="milestone-dot"></div>Concern about new hires missing formative developmental experiences as AI shortcuts learning</div>
-        </div>
-        <div class="insight-box">
-          <span class="insight-label">Key insight</span>
-          "No one is an expert in AI." The organization is not waiting for expertise to arrive. It is building the capacity to learn, adapt, and govern as it goes.
+          <div class="panel-title">So, What Now?</div>
+          <div class="panel-sub">Three questions to sit with before you leave</div>
         </div>
       </div>
-    </div>
+      <div class="panel-arrow">→</div>
+    </a>
   </div>
 
-  <!-- PHASE 6: FUTURE -->
-  <div class="phase">
-    <div class="phase-dot future"></div>
-    <div class="phase-card">
-      <div class="phase-header">
-        <div>
-          <span class="phase-tag tag-future">Horizon</span>
-          <h2 class="phase-title">The agentic future: AI orchestrates workflows autonomously</h2>
-        </div>
-        <span class="phase-duration">Looking ahead</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Leadership anticipates a near-future in which agentic AI, systems capable of acting independently across tasks, replaces today's tool-by-tool model. Security operations offer a preview: rather than routing alerts through multiple systems, all log data flows into a security lake where AI organically correlates and responds.</p>
-        <div class="milestones">
-          <div class="milestone"><div class="milestone-dot"></div>Agentic AI to orchestrate security operations without manual alert routing</div>
-          <div class="milestone"><div class="milestone-dot"></div>Shift from third-party SaaS products toward custom-built AI applications</div>
-          <div class="milestone"><div class="milestone-dot"></div>New team structures and skill mixes required as roles evolve</div>
-          <div class="milestone"><div class="milestone-dot"></div>Governance question: who is accountable when AI acts without a human checkpoint?</div>
-        </div>
-        <div class="insight-box">
-          <span class="insight-label">Open question</span>
-          The acceleration is "unbelievable." The organizations that will lead are not those with the best tools, but those that build the human capacity, trust, and governance to keep pace.
-        </div>
-      </div>
-    </div>
+  <div class="footer">
+    <span>Spring 2026 · Teachers College, Columbia University</span>
+    <span>ORL 5199</span>
   </div>
-
-</div>
-
-<!-- TAKEAWAY -->
-<div class="takeaway">
-  <span class="takeaway-label">The through line</span>
-  <p class="takeaway-text">AI readiness is not a destination. It is a two-year journey of curiosity, community, proven value, and earned governance, built one experiment at a time by people who were willing to not know the answer yet.</p>
-  <div class="takeaway-frameworks">
-    <span class="takeaway-pill">Kolbjornsrud (2023)</span>
-    <span class="takeaway-pill">Deloitte (2021)</span>
-    <span class="takeaway-pill">Heifetz &amp; Laurie (2001)</span>
-    <span class="takeaway-pill">Daugherty &amp; Wilson (2024)</span>
-    <span class="takeaway-pill">Chamorro-Premuzic &amp; Bersin (2018)</span>
-  </div>
-</div>
-
-<div class="footer">
-  <p class="footer-note">Based on three engagements with a partner organization. All identifying details removed.</p>
-  <p class="footer-course">ORL 5199 · Spring 2026</p>
-</div>
 
 </body>
 </html>
