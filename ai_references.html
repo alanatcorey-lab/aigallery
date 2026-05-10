@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>References | ORL 5199</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1c1a16;
+    --ink-2: #4a4740;
+    --ink-3: #8a877e;
+    --cream: #f8f5ef;
+    --cream-2: #eeebe2;
+    --cream-3: #e3dfd5;
+    --teal: #1D9E75;
+    --teal-mid: #0F6E56;
+    --accent: #D85A30;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 56px 40px 80px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+
+  .header-rule {
+    width: 56px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .header-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 48px;
+  }
+
+  /* MODULE SECTIONS */
+  .module-section {
+    margin-bottom: 40px;
+  }
+
+  .module-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  .label-intro   { background: var(--cream-2);      color: var(--ink-3); }
+  .label-mod1    { background: var(--teal-light, #E1F5EE); color: var(--teal-mid); }
+  .label-mod2    { background: var(--purple-light);  color: var(--purple); }
+  .label-mod3    { background: var(--amber-light);   color: var(--amber); }
+
+  /* REFERENCE LIST */
+  .ref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ref-card {
+    background: #fff;
+    border: 0.5px solid var(--cream-3);
+    border-radius: 0;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    align-items: start;
+    opacity: 0;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .ref-card:first-child { border-radius: 12px 12px 0 0; }
+  .ref-card:last-child  { border-radius: 0 0 12px 12px; }
+  .ref-card:only-child  { border-radius: 12px; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; }
+  }
+
+  .ref-card:nth-child(1)  { animation-delay: 0.03s; }
+  .ref-card:nth-child(2)  { animation-delay: 0.06s; }
+  .ref-card:nth-child(3)  { animation-delay: 0.09s; }
+  .ref-card:nth-child(4)  { animation-delay: 0.12s; }
+  .ref-card:nth-child(5)  { animation-delay: 0.15s; }
+  .ref-card:nth-child(6)  { animation-delay: 0.18s; }
+  .ref-card:nth-child(7)  { animation-delay: 0.21s; }
+  .ref-card:nth-child(8)  { animation-delay: 0.24s; }
+  .ref-card:nth-child(9)  { animation-delay: 0.27s; }
+  .ref-card:nth-child(10) { animation-delay: 0.30s; }
+
+  .ref-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .icon-article { background: var(--cream-2); color: var(--ink-3); }
+  .icon-book    { background: #E1F5EE;        color: var(--teal-mid); }
+  .icon-media   { background: var(--purple-light); color: var(--purple); }
+  .icon-report  { background: var(--amber-light);  color: var(--amber); }
+
+  .ref-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+
+  .ref-text em {
+    font-style: italic;
+  }
+
+  .ref-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+    background: var(--cream-2);
+    color: var(--ink-3);
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 0.5px;
+    background: var(--cream-3);
+    margin: 36px 0;
+  }
+
+  /* AI USE NOTE */
+  .ai-note {
+    background: #fff;
+    border: 0.5px solid var(--cream-3);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 40px;
+  }
+
+  .ai-note-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .ai-note-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 0.5px solid var(--cream-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+
+  .footer-course {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+</style>
+</head>
+<body>
+
+<p class="eyebrow">ORL 5199 · Augmented by Design</p>
+<h1>References</h1>
+<div class="header-rule"></div>
+<p class="header-desc">All sources drawn upon across the five gallery panels, organized by module and formatted in APA 7th edition.</p>
+
+<!-- INTRODUCTION -->
+<div class="module-section">
+  <span class="module-label label-intro">Introduction</span>
+  <div class="ref-list">
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">Daigle, C. (Host). (n.d.). <em>Using AI at work</em> [Audio podcast]. Spotify.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">McKinsey &amp; Company. (n.d.). The key to accelerating AI development? Pragmatism plus imagination [Podcast episode]. In <em>The McKinsey Podcast</em>. Spotify.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- MODULE 1 -->
+<div class="module-section">
+  <span class="module-label label-mod1">Module 1: Ethical Adaptive Leadership</span>
+  <div class="ref-list">
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">ASAE Center. (2025, March). Employees, AI, and ethical leadership: Talking about change. <em>ASAE</em>.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">Center for Creative Leadership. (2023). Lead with that: What AI can teach us about human-centered leadership. In <em>Lead With That</em> [Podcast].</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-book">B</div>
+      <p class="ref-text">Crawford, K. (2021). <em>Atlas of AI: Power, politics, and the planetary costs of artificial intelligence</em> (Introduction and Chapter 2). Yale University Press.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-book">B</div>
+      <p class="ref-text">Daugherty, P., &amp; Wilson, H. J. (2024). <em>Human + machine, updated and expanded: Reimagining work in the age of AI</em> (Updated and expanded ed., Chapters 1, 4, 6). Harvard Business Review Press.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-media">▶</div>
+      <p class="ref-text">FranklinCovey. (2023, August 14). <em>Geoff Woods: AI leadership</em> [Video]. YouTube.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Heifetz, R. A., &amp; Laurie, D. L. (2001). The work of leadership. <em>Harvard Business Review, 79</em>(11).</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Kandasamy, U. C. (2024, October 30). <em>Ethical leadership in the age of AI: Challenges, opportunities and framework for ethical leadership</em>. arXiv.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- MODULE 2 -->
+<div class="module-section">
+  <span class="module-label label-mod2">Module 2: AI and Team Dynamics</span>
+  <div class="ref-list">
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">Beard, A. (Host). (2023, August 29). Leading a workforce empowered by new AI tools (No. 3) [Audio podcast episode]. In <em>HBR IdeaCast</em>. Harvard Business Review.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Chamorro-Premuzic, T., &amp; Bersin, J. (2018, July 12). 4 ways to create a learning culture on your team. <em>Harvard Business Review</em>.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Columbia Business School. (2023, September). Understanding the impact of AI on team performance: Challenges and insights. <em>Columbia Business School</em>.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-book">B</div>
+      <p class="ref-text">Daugherty, P., &amp; Wilson, H. J. (2024). <em>Human + machine, updated and expanded: Reimagining work in the age of AI</em> (Updated and expanded ed., Chapters 7 and 9). Harvard Business Review Press.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Green, Z. G., &amp; Molenkamp, R. J. (2005). The BART system of group and organizational analysis.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-book">B</div>
+      <p class="ref-text">Katzenbach, J. R., Eisenhardt, K. M., &amp; Gratton, L. (2013). <em>HBR's 10 must reads on teams</em> (Chapters 4 and 6). Harvard Business Review Press.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">Martinez, J., &amp; Stackpole, T. (Hosts). (2024, May 2). Tech at work: What GenAI means for companies right now (No. 1) [Audio podcast episode]. In <em>HBR IdeaCast: Tech at Work</em>. Harvard Business Review.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Raue, S., Tang, S. H., Weiland, C., &amp; Wenzlik, C. (2013). The GRPI model: An approach for team development.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Reitz, M., &amp; Higgins, J. (2024, April 1). How AI features can change team dynamics. <em>Harvard Business Review</em>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- MODULE 3 -->
+<div class="module-section">
+  <span class="module-label label-mod3">Module 3: Leading AI and Building AI-Ready Cultures</span>
+  <div class="ref-list">
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">Accenture. (2025, January 20). AI in education: Revolutionizing learning (No. 68). In <em>AI Leaders Podcast</em>. Accenture.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-media">🎙</div>
+      <p class="ref-text">Bernstein, A. (Host). (2023, May 11). How generative AI changes organizational culture (No. 2) [Audio podcast episode]. In <em>HBR IdeaCast: How Generative AI Changes Everything</em>. Harvard Business Review.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-book">B</div>
+      <p class="ref-text">Daugherty, P., &amp; Wilson, H. J. (2024). <em>Human + machine, updated and expanded: Reimagining work in the age of AI</em> (Updated and expanded ed., Chapter 8). Harvard Business Review Press.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-report">R</div>
+      <p class="ref-text">Deloitte. (2021). <em>How to build an AI-ready culture</em>. Deloitte Insights.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Frimpong, V., &amp; Wolfs, B. (2024). Predictive effect of AI on leadership: Insights from public case studies on organizational dynamics. <em>International Journal of Business Administration, 15</em>(3), 39-48.</p>
+    </div>
+    <div class="ref-card">
+      <div class="ref-icon icon-article">A</div>
+      <p class="ref-text">Kolbjornsrud, V. (2023). Designing the intelligent organization: Six principles for human-AI collaboration. <em>California Management Review, 66</em>(2), 44-64.</p>
+    </div>
+  </div>
+</div>
+
+<!-- AI USE NOTE -->
+<div class="ai-note">
+  <span class="ai-note-label">AI use acknowledgment</span>
+  <p class="ai-note-text">Portions of the gallery content were developed in collaboration with Claude, an AI assistant by Anthropic, to support clarity, synthesis, and design refinement. All content has been reviewed, edited, and approved by the author. Citations were verified independently.</p>
+  <br>
+  <p class="ai-note-text">Anthropic. (2025). <em>Claude</em> (Claude Sonnet 4.6) [Large language model]. https://claude.ai</p>
+</div>
+
+<div class="footer">
+  <p class="footer-note">All references formatted in APA 7th edition.</p>
+  <p class="footer-course">ORL 5199 · Spring 2026</p>
+</div>
+
+</body>
+</html>
