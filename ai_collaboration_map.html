@@ -25,24 +25,81 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
+    background: var(--bg-2);
     color: var(--text-primary);
-    padding: 40px 32px;
+    padding: 56px 40px 80px;
     max-width: 900px;
     margin: 0 auto;
   }
 
-  h1 {
-    font-size: 22px;
+  .header {
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal-400);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 400;
+    font-family: 'Georgia', serif;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+
+  .header-rule {
+    width: 56px;
+    height: 2px;
+    background: #D85A30;
+    margin-bottom: 16px;
   }
 
   .subtitle {
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 0;
+  }
+
+  .context-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .context-item {
+    background: #fff;
+    border: 0.5px solid rgba(60,58,50,0.12);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .context-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-tertiary);
-    margin-bottom: 28px;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .context-value {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
   }
 
   .legend {
@@ -233,8 +290,27 @@
 </head>
 <body>
 
-<h1>AI Collaboration Map</h1>
-<p class="subtitle">How humans and AI share work — and where oversight is non-negotiable</p>
+<div class="header">
+  <p class="header-eyebrow">ORL 5199 · Augmented by Design</p>
+  <h1>AI Collaboration<br>Map</h1>
+  <div class="header-rule"></div>
+  <p class="subtitle">When AI enters a workflow, the question is not whether humans are still needed, it is where human judgment is irreplaceable. This map traces two real-world workflows from a partner organization, showing exactly where AI takes the lead, where humans must step in, and why the handoff points matter for accountability, ethics, and trust.</p>
+</div>
+
+<div class="context-bar">
+  <div class="context-item">
+    <span class="context-label">Core principle</span>
+    <span class="context-value">AI handles speed and scale. Humans handle judgment and accountability.</span>
+  </div>
+  <div class="context-item">
+    <span class="context-label">Grounded in</span>
+    <span class="context-value">Daugherty and Wilson's missing middle framework (2024)</span>
+  </div>
+  <div class="context-item">
+    <span class="context-label">Key insight</span>
+    <span class="context-value">Accountability cannot be delegated to an algorithm (Kandasamy, 2024)</span>
+  </div>
+</div>
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div> Human-led step</div>
@@ -272,7 +348,7 @@
       <span class="node-sub">approve / deny</span>
     </div>
   </div>
-  <p class="note">⚠ Human review is legally and ethically required — biased AI decisions carry organizational liability</p>
+  <p class="note">⚠ Human review is legally and ethically required , biased AI decisions carry organizational liability</p>
 </div>
 
 <!-- WORKFLOW 2 -->
@@ -304,7 +380,7 @@
       <span class="node-sub">logged + documented</span>
     </div>
   </div>
-  <p class="note">⚠ Human accountable for response decision — AI handles speed and pattern recognition, not judgment</p>
+  <p class="note">⚠ Human accountable for response decision , AI handles speed and pattern recognition, not judgment</p>
 </div>
 
 <!-- PATTERNS -->
@@ -328,13 +404,13 @@
   </div>
 
   <div class="framework-box">
-    Grounded in <strong>Daugherty &amp; Wilson's missing middle</strong> — humans and AI each cover what the other cannot.<br>
+    Grounded in <strong>Daugherty &amp; Wilson's missing middle</strong> , humans and AI each cover what the other cannot.<br>
     <strong>Kandasamy (2024)</strong>: accountability cannot be delegated to an algorithm.
   </div>
 
   <div class="future-box">
     <span class="future-label">The agentic future</span>
-    As agentic AI matures, AI may orchestrate entire workflows autonomously — but the governance question remains:<br>
+    As agentic AI matures, AI may orchestrate entire workflows autonomously , but the governance question remains:<br>
     who is accountable when AI acts without a human checkpoint?
   </div>
 </div>
