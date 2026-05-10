@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Myth Busters</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1c1a16;
+    --ink-2: #4a4740;
+    --ink-3: #8a877e;
+    --cream: #f8f5ef;
+    --cream-2: #eeebe2;
+    --cream-3: #e3dfd5;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-mid: #0F6E56;
+    --accent: #D85A30;
+    --red-light: #FCEBEB;
+    --red-mid: #A32D2D;
+    --green-light: #EAF3DE;
+    --green-mid: #3B6D11;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 56px 40px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .header-rule {
+    width: 56px;
+    height: 2px;
+    background: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .header-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  .header-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 400;
+    color: var(--cream-3);
+    line-height: 1;
+    user-select: none;
+    letter-spacing: -0.04em;
+  }
+
+  /* GRID */
+  .myth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* CARDS */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    border: 0.5px solid var(--cream-3);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+
+  .card-header {
+    padding: 18px 20px 14px;
+    border-bottom: 0.5px solid var(--cream-2);
+  }
+
+  .myth-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 9px;
+    background: var(--red-light);
+    color: var(--red-mid);
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .card-body {
+    padding: 16px 20px 20px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 5px;
+    margin-top: 14px;
+  }
+
+  .section-label:first-child { margin-top: 0; }
+
+  .why-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.75;
+    font-style: italic;
+    border-left: 2px solid var(--cream-3);
+    padding-left: 10px;
+  }
+
+  .research-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+
+  .card-divider {
+    height: 0.5px;
+    background: var(--cream-2);
+    margin: 14px 0;
+  }
+
+  .frameworks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 0.5px solid var(--cream-3);
+    color: var(--ink-3);
+    background: var(--cream);
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 0.5px solid var(--cream-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-refs {
+    font-size: 11px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+
+  .footer-course {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-number">4</div>
+  <p class="header-eyebrow">ORL 5199 · Augmented by Design</p>
+  <h1>AI Myth<br>Busters</h1>
+  <div class="header-rule"></div>
+  <p class="header-desc">Four common assumptions about AI in organizations, and what the research actually says.</p>
+</div>
+
+<div class="myth-grid">
+
+  <!-- MYTH 1 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="myth-tag">Myth</span>
+      <h2 class="card-title">"AI will replace human workers"</h2>
+    </div>
+    <div class="card-body">
+      <p class="section-label">Why people believe it</p>
+      <p class="why-text">Headlines warn of mass automation. When AI completes tasks in seconds that once took hours, it's easy to assume the human is next to go.</p>
+      <p class="section-label">What the research says</p>
+      <p class="research-text">Daugherty and Wilson find that the most productive AI deployments don't eliminate roles, they reshape them. Humans and AI each cover what the other cannot: machines handle speed and scale, while humans supply judgment, ethics, and relational intelligence. The real risk isn't replacement, it's the developmental gap that emerges when AI shortcuts the learning experiences that build human expertise over time.</p>
+      <div class="card-divider"></div>
+      <p class="section-label">Grounded in</p>
+      <div class="frameworks">
+        <span class="pill">Daugherty &amp; Wilson (2024)</span>
+        <span class="pill">Human-AI collaboration</span>
+        <span class="pill">Adaptive leadership</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 2 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="myth-tag">Myth</span>
+      <h2 class="card-title">"AI adoption is an IT problem"</h2>
+    </div>
+    <div class="card-body">
+      <p class="section-label">Why people believe it</p>
+      <p class="why-text">AI involves algorithms, infrastructure, and data pipelines, so it's natural to hand it off to the technology team and wait for rollout.</p>
+      <p class="section-label">What the research says</p>
+      <p class="research-text">Crawford argues AI is a sociotechnical system, shaped by power, politics, and human choices, not just code. The most common adoption barriers aren't technical: they're cultural resistance, psychological safety gaps, and accountability ambiguity. Heifetz and Laurie's distinction between technical and adaptive challenges is critical here. AI integration demands the latter, requiring leaders to change values, beliefs, and behaviors, not just deploy tools.</p>
+      <div class="card-divider"></div>
+      <p class="section-label">Grounded in</p>
+      <div class="frameworks">
+        <span class="pill">Crawford (2021)</span>
+        <span class="pill">Heifetz &amp; Laurie (2001)</span>
+        <span class="pill">Adaptive vs. technical work</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 3 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="myth-tag">Myth</span>
+      <h2 class="card-title">"AI strategy must come from the top"</h2>
+    </div>
+    <div class="card-body">
+      <p class="section-label">Why people believe it</p>
+      <p class="why-text">Large-scale change usually requires executive sponsorship and a formal rollout plan, so AI should be no different.</p>
+      <p class="section-label">What the research says</p>
+      <p class="research-text">Kolbjornsrud's principles for intelligent organizations show that sustainable AI integration often begins at the edges, through peer experimentation, communities of practice, and team-level learning, before governance structures catch up. Deloitte's research on AI-ready cultures similarly finds that psychological safety and bottom-up curiosity are stronger predictors of adoption success than top-down mandates. Structure follows culture, not the other way around.</p>
+      <div class="card-divider"></div>
+      <p class="section-label">Grounded in</p>
+      <div class="frameworks">
+        <span class="pill">Kolbjornsrud (2023)</span>
+        <span class="pill">Deloitte (2021)</span>
+        <span class="pill">Community of practice</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 4 -->
+  <div class="card">
+    <div class="card-header">
+      <span class="myth-tag">Myth</span>
+      <h2 class="card-title">"You need AI experts to get started"</h2>
+    </div>
+    <div class="card-body">
+      <p class="section-label">Why people believe it</p>
+      <p class="why-text">AI feels technically complex, so surely you need data scientists and machine learning engineers before your organization can meaningfully engage with it.</p>
+      <p class="section-label">What the research says</p>
+      <p class="research-text">Chamorro-Premuzic and Bersin find that learning cultures, built on curiosity, psychological safety, and peer knowledge-sharing, matter far more than technical credentials. Kandasamy's ethical leadership framework echoes this: what organizations need most are leaders who ask the right questions about AI's implications, not those who can build the models. Critical thinking and adaptability are the core competencies, and they already exist in most teams.</p>
+      <div class="card-divider"></div>
+      <p class="section-label">Grounded in</p>
+      <div class="frameworks">
+        <span class="pill">Chamorro-Premuzic &amp; Bersin (2018)</span>
+        <span class="pill">Kandasamy (2024)</span>
+        <span class="pill">Learning culture</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p class="footer-refs">Crawford (2021) · Heifetz &amp; Laurie (2001) · Daugherty &amp; Wilson (2024) · Kandasamy (2024)<br>Chamorro-Premuzic &amp; Bersin (2018) · Kolbjornsrud (2023) · Deloitte (2021)</p>
+  <p class="footer-course">ORL 5199 · Spring 2026</p>
+</div>
+
+</body>
+</html>

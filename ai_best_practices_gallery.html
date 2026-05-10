@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Best Practices</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1c1a16;
+    --ink-2: #4a4740;
+    --ink-3: #8a877e;
+    --cream: #f8f5ef;
+    --cream-2: #eeebe2;
+    --cream-3: #e3dfd5;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-mid: #0F6E56;
+    --gold: #BA7517;
+    --gold-light: #FAEEDA;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --accent: #D85A30;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 56px 40px 80px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    margin-bottom: 52px;
+    position: relative;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .header-rule {
+    width: 56px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .header-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  .header-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 400;
+    color: var(--cream-3);
+    line-height: 1;
+    user-select: none;
+    letter-spacing: -0.04em;
+  }
+
+  /* CARDS */
+  .cards { display: flex; flex-direction: column; gap: 2px; }
+
+  .card {
+    background: #fff;
+    border-radius: 0;
+    border: 0.5px solid var(--cream-3);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .card:first-child { border-radius: 12px 12px 0 0; }
+  .card:last-child { border-radius: 0 0 12px 12px; }
+  .card:only-child { border-radius: 12px; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.33s; }
+
+  .card-number {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream-3);
+    border-right: 0.5px solid var(--cream-3);
+    flex-shrink: 0;
+  }
+
+  .card-body { padding: 24px 28px 24px 26px; }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .tag-culture  { background: var(--teal-light);  color: var(--teal-mid); }
+  .tag-govern   { background: var(--purple-light); color: var(--purple); }
+  .tag-oversight{ background: var(--gold-light);   color: var(--gold); }
+  .tag-safety   { background: #FAECE7;             color: #993C1D; }
+  .tag-norms    { background: var(--cream-2);      color: var(--ink-2); }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .card-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 5px;
+    margin-top: 14px;
+  }
+
+  .card-section-label:first-of-type { margin-top: 0; }
+
+  .card-principle {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.75;
+    font-style: italic;
+    border-left: 2px solid var(--cream-3);
+    padding-left: 12px;
+    margin-bottom: 2px;
+  }
+
+  .card-research {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+
+  .card-divider {
+    height: 0.5px;
+    background: var(--cream-2);
+    margin: 16px 0;
+  }
+
+  .card-action {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .action-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .action-text { flex: 1; }
+
+  .action-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .action-body {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 0.5px solid var(--cream-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-refs {
+    font-size: 11px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+
+  .footer-course {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-number">5</div>
+  <p class="header-eyebrow">ORL 5199 · Augmented by Design</p>
+  <h1>AI Best<br>Practices</h1>
+  <div class="header-rule"></div>
+  <p class="header-desc">Five research-grounded practices for leaders navigating AI integration — drawn from course frameworks and the evidence on what actually works.</p>
+</div>
+
+<div class="cards">
+
+  <!-- CARD 1 -->
+  <div class="card">
+    <div class="card-number">1</div>
+    <div class="card-body">
+      <span class="card-tag tag-culture">Learning culture</span>
+      <h2 class="card-title">Build a learning culture before buying AI tools</h2>
+      <p class="card-section-label">The principle</p>
+      <p class="card-principle">Technology without culture is infrastructure without people. Organizations that invest in tools before building the conditions for learning find adoption stalls — not because the tools fail, but because teams aren't ready to experiment, make mistakes, or share what they discover.</p>
+      <p class="card-section-label">What research tells us</p>
+      <p class="card-research">Chamorro-Premuzic &amp; Bersin identify four conditions that make learning cultures stick: reward learning over performance, model curiosity from leadership, create space for reflection, and normalize not knowing. Deloitte's AI-readiness research echoes this — organizations that cultivate psychological safety and peer knowledge-sharing before deploying AI tools see significantly stronger adoption outcomes.</p>
+      <div class="card-divider"></div>
+      <div class="card-action">
+        <div class="action-icon">→</div>
+        <div class="action-text">
+          <span class="action-label">Leader action</span>
+          <p class="action-body">Ask your team what they're curious about — not what they've already mastered. Reward the question, not just the answer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card">
+    <div class="card-number">2</div>
+    <div class="card-body">
+      <span class="card-tag tag-govern">Governance</span>
+      <h2 class="card-title">Start grassroots, then formalize governance</h2>
+      <p class="card-section-label">The principle</p>
+      <p class="card-principle">Waiting for a fully formed AI strategy before allowing experimentation often means waiting too long. The organizations making the most progress tend to let curiosity lead — and build governance structures around what they learn, not the other way around.</p>
+      <p class="card-section-label">What research tells us</p>
+      <p class="card-research">Kolbjørnsrud's six principles for intelligent organizations emphasize that distributed experimentation — letting teams explore AI applications close to the work — produces richer insight than centralized planning. Over time, communities of practice become the connective tissue between grassroots learning and organizational policy. Frimpong &amp; Wolfs find that adaptive leaders who support emergent adoption are better positioned to scale it responsibly.</p>
+      <div class="card-divider"></div>
+      <div class="card-action">
+        <div class="action-icon">→</div>
+        <div class="action-text">
+          <span class="action-label">Leader action</span>
+          <p class="action-body">Create a low-stakes space for teams to experiment. Document what works. Let governance follow evidence, not assumption.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card">
+    <div class="card-number">3</div>
+    <div class="card-body">
+      <span class="card-tag tag-oversight">Human oversight</span>
+      <h2 class="card-title">Keep humans in the loop for high-stakes decisions</h2>
+      <p class="card-section-label">The principle</p>
+      <p class="card-principle">AI can process information at a scale and speed no human can match — but speed and scale are not the same as accountability. In consequential decisions, removing the human from the loop doesn't just risk error; it risks eroding the trust that organizations depend on.</p>
+      <p class="card-section-label">What research tells us</p>
+      <p class="card-research">Daugherty &amp; Wilson's missing middle framework argues that the highest-value human contributions — ethical judgment, contextual empathy, stakeholder accountability — are precisely what AI cannot replicate. Kandasamy's ethical leadership framework adds that leaders must actively design for human oversight, particularly where AI outputs affect individuals' lives, livelihoods, or rights. Accountability cannot be delegated to an algorithm.</p>
+      <div class="card-divider"></div>
+      <div class="card-action">
+        <div class="action-icon">→</div>
+        <div class="action-text">
+          <span class="action-label">Leader action</span>
+          <p class="action-body">Map your team's workflows and explicitly identify which decisions require human review — before AI is deployed, not after.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="card">
+    <div class="card-number">4</div>
+    <div class="card-body">
+      <span class="card-tag tag-safety">Psychological safety</span>
+      <h2 class="card-title">Establish psychological safety around AI mistakes</h2>
+      <p class="card-section-label">The principle</p>
+      <p class="card-principle">AI will produce errors — hallucinations, biased outputs, flawed recommendations. If team members fear judgment for surfacing those mistakes, organizations lose their most important feedback loop and compound the harm.</p>
+      <p class="card-section-label">What research tells us</p>
+      <p class="card-research">The BART system of group analysis highlights how boundary and authority dynamics shape what people feel safe raising. When AI errors carry professional stigma, they go unreported. Reitz &amp; Higgins find that teams where leaders openly model uncertainty — including about AI outputs — develop stronger norms around critical evaluation. Crawford's work adds that AI systems encode existing biases; detecting them requires teams who feel safe enough to speak up.</p>
+      <div class="card-divider"></div>
+      <div class="card-action">
+        <div class="action-icon">→</div>
+        <div class="action-text">
+          <span class="action-label">Leader action</span>
+          <p class="action-body">Share an AI output that missed the mark — with your team. Model what it looks like to catch it, name it, and correct it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 5 -->
+  <div class="card">
+    <div class="card-number">5</div>
+    <div class="card-body">
+      <span class="card-tag tag-norms">Team norms</span>
+      <h2 class="card-title">Create AI-specific team norms and shared expectations</h2>
+      <p class="card-section-label">The principle</p>
+      <p class="card-principle">When AI enters a team, existing norms — about communication, decision-making, and accountability — don't automatically adapt. Without intentional norm-setting, teams default to inconsistency: some members rely heavily on AI, others avoid it, and no one is sure whose outputs to trust.</p>
+      <p class="card-section-label">What research tells us</p>
+      <p class="card-research">The GRPI model frames effective teams as those with clarity across four dimensions: goals, roles, processes, and interpersonal norms. AI disrupts all four simultaneously. Katzenbach &amp; Smith's discipline of teams research shows that high-performing teams establish explicit working agreements — and AI integration requires a new layer of those agreements: When do we use AI? Who reviews its outputs? How do we handle disagreement with what it produces? Columbia Business School's research finds that teams who set these norms proactively outperform those who let usage patterns emerge by default.</p>
+      <div class="card-divider"></div>
+      <div class="card-action">
+        <div class="action-icon">→</div>
+        <div class="action-text">
+          <span class="action-label">Leader action</span>
+          <p class="action-body">Facilitate a team conversation — not a policy — about how AI fits into your workflows. Co-create the norms; don't hand them down.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p class="footer-refs">Chamorro-Premuzic &amp; Bersin (2018) · Deloitte (2021) · Kolbjørnsrud (2023) · Frimpong &amp; Wolfs (2024)<br>Daugherty &amp; Wilson (2024) · Kandasamy (2024) · Green &amp; Molenkamp (2005) · Reitz &amp; Higgins (2024) · Crawford (2021)</p>
+  <p class="footer-course">ORL 5199 · Spring 2026</p>
+</div>
+
+</body>
+</html>
